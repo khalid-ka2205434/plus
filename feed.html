@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plus | Feed</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <a href="feed.html" class="logo-link">
+            <img src="assets/images/logo.png" alt="Plus Logo" class="logo-image">
+        </a>
+
+        <nav class="nav-links">
+            <a href="feed.html" class="nav-btn">Feed</a>
+            <a href="profile.html" class="nav-btn">Profile</a>
+            <button id="logoutBtn" class="nav-btn signup-btn">Logout</button>
+        </nav>
+    </header>
+
+    <main class="feed-page">
+        <section class="welcome-section">
+            <h1 id="welcomeMessage">Welcome</h1>
+            <p>Share your latest thoughts with your followers.</p>
+        </section>
+        <section class="users-section">
+              <h2>Discover Users</h2>
+           <div id="usersContainer"></div>
+          </section>
+        <section class="post-form-section">
+            <h2>Create a Post</h2>
+            <form id="postForm">
+                <div class="form-group">
+                    <label for="postContent">What's on your mind?</label>
+                    <textarea id="postContent" name="postContent" rows="4" placeholder="Write your post here..." required></textarea>
+                </div>
+
+                <button type="submit" class="primary-btn">Post</button>
+            </form>
+        </section>
+
+        <section class="posts-section">
+            <h2>Recent Posts</h2>
+            <div id="postsContainer"></div>
+        </section>
+    </main>
+
+    <script src="js/feed.js"></script>
+</body>
+</html>

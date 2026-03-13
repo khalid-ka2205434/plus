@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plus | Sign Up</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="form-page">
+        <section class="form-container">
+            <div class="form-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="assets/images/logo.png" alt="Plus Logo" class="form-logo-image">
+                </a>
+            </div>
+
+            <h1>Create Your Account</h1>
+            <p class="form-subtitle">Join Plus and start sharing with others.</p>
+
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" name="signupUsername" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupBio">Bio</label>
+                    <textarea id="signupBio" name="signupBio" placeholder="Write a short bio" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="primary-btn full-width-btn">Create Account</button>
+            </form>
+
+            <p class="form-footer">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+            <p class="form-footer">
+                <a href="index.html">Back to Home</a>
+            </p>
+        </section>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

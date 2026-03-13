@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plus | Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <a href="feed.html" class="logo-link">
+            <img src="assets/images/logo.png" alt="Plus Logo" class="logo-image">
+        </a>
+
+        <nav class="nav-links">
+            <a href="feed.html" class="nav-btn">Feed</a>
+            <a href="profile.html" class="nav-btn">Profile</a>
+            <button id="profileLogoutBtn" class="nav-btn signup-btn">Logout</button>
+        </nav>
+    </header>
+
+    <main class="profile-page">
+        <section class="profile-card">
+            <h1>My Profile</h1>
+
+            <div class="profile-info">
+                <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+                <p><strong>Bio:</strong> <span id="profileBio"></span></p>
+            </div>
+
+            <form id="bioForm" class="bio-form">
+                <div class="form-group">
+                    <label for="bioInput">Edit Bio</label>
+                    <textarea id="bioInput" rows="4" placeholder="Write your new bio"></textarea>
+                </div>
+                <button type="submit" class="primary-btn">Save Bio</button>
+            </form>
+        </section>
+
+        <section class="posts-section">
+            <h2>My Posts</h2>
+            <div id="myPostsContainer"></div>
+        </section>
+    </main>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>
