@@ -23,6 +23,11 @@ if (signupForm) {
         const password = document.getElementById("signupPassword").value.trim();
         const bio = document.getElementById("signupBio").value.trim();
 
+        const selectedAvatarInput = document.querySelector('input[name="profilePicture"]:checked');
+        const selectedAvatar = selectedAvatarInput
+            ? selectedAvatarInput.value
+            : "assets/images/default-avatar.png";
+
         const users = getUsers();
 
         const emailExists = users.find(function (user) {
@@ -40,6 +45,7 @@ if (signupForm) {
             email: email,
             password: password,
             bio: bio,
+            profilePicture: selectedAvatar,
             following: []
         };
 

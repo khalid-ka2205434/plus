@@ -1,10 +1,12 @@
 const profileUsername = document.getElementById("profileUsername");
 const profileEmail = document.getElementById("profileEmail");
 const profileBio = document.getElementById("profileBio");
+const profileImage = document.getElementById("profileImage");
 const bioForm = document.getElementById("bioForm");
 const bioInput = document.getElementById("bioInput");
 const myPostsContainer = document.getElementById("myPostsContainer");
 const profileLogoutBtn = document.getElementById("profileLogoutBtn");
+const savePictureBtn = document.getElementById("savePictureBtn");
 
 function getCurrentUser() {
     const currentUser = localStorage.getItem("currentUser");
@@ -37,6 +39,9 @@ function renderProfile() {
     profileEmail.textContent = currentUser.email;
     profileBio.textContent = currentUser.bio ? currentUser.bio : "No bio yet.";
     bioInput.value = currentUser.bio ? currentUser.bio : "";
+    profileImage.src = currentUser.profilePicture
+        ? currentUser.profilePicture
+        : "assets/images/default-avatar.png";
 }
 
 function renderMyPosts() {
@@ -97,6 +102,35 @@ if (bioForm) {
 
         renderProfile();
         alert("Bio updated successfully!");
+    });
+}
+
+if (savePictureBtn) {
+    savePictureBtn.addEventListener("click", function () {
+        const selectedPictureInput = document.querySelector('input[name="editProfilePicture"]:checked');
+
+        if (!selectedPictureInput) {
+            alert("Please choose a profile picture first.");
+            return;
+        }
+
+        const newPicture = selectedPictureInput.value;
+        const currentUser = getCurrentUser();
+        const users = getUsers();
+
+        const updatedUsers = users.map(function (user) {
+            if (user.id === currentUser.id) {
+                user.profilePicture = newPicture;
+                currentUser.profilePicture = newPicture;
+            }
+            return user;
+        });
+
+        saveUsers(updatedUsers);
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        renderProfile();
+        alert("Profile picture updated successfully!");
     });
 }
 

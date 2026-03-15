@@ -26,13 +26,23 @@ a {
     text-decoration: none;
 }
 
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =========================
+   Header
+========================= */
 .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     padding: 16px;
     background-color: var(--color-white);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    flex-wrap: wrap;
 }
 
 .logo-link {
@@ -42,23 +52,29 @@ a {
 .logo-image {
     width: 90px;
     height: auto;
-    display: block;
 }
 
 .nav-links {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
+/* =========================
+   Buttons
+========================= */
 .nav-btn,
 .primary-btn,
-.secondary-btn {
+.secondary-btn,
+.post-btn {
     display: inline-block;
     padding: 10px 18px;
     border-radius: 8px;
     transition: 0.3s;
     font-weight: bold;
+    cursor: pointer;
+    border: none;
 }
 
 .nav-btn {
@@ -70,7 +86,6 @@ a {
 .primary-btn {
     background-color: var(--color-primary);
     color: var(--color-white);
-    border: none;
 }
 
 .secondary-btn {
@@ -79,17 +94,34 @@ a {
     border: 1px solid var(--color-primary);
 }
 
+.post-btn {
+    padding: 8px 14px;
+    background-color: #dbe7f3;
+    color: var(--color-primary);
+}
+
 .nav-btn:hover,
 .primary-btn:hover,
-.secondary-btn:hover {
+.secondary-btn:hover,
+.post-btn:hover {
     opacity: 0.9;
 }
 
+.full-width-btn {
+    width: 100%;
+    font-size: 1rem;
+}
+
+/* =========================
+   Home / Hero
+========================= */
 .hero-section {
     display: flex;
     flex-direction: column;
     gap: 24px;
     padding: 24px 16px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .hero-text h1 {
@@ -130,6 +162,9 @@ a {
     margin-bottom: 8px;
 }
 
+/* =========================
+   Forms
+========================= */
 .form-page {
     min-height: 100vh;
     display: flex;
@@ -140,7 +175,7 @@ a {
 
 .form-container {
     width: 100%;
-    max-width: 420px;
+    max-width: 480px;
     background-color: var(--color-white);
     padding: 24px;
     border-radius: 14px;
@@ -155,6 +190,7 @@ a {
 .form-logo-image {
     width: 110px;
     height: auto;
+    margin: 0 auto;
 }
 
 .form-container h1 {
@@ -180,24 +216,28 @@ a {
     color: var(--color-primary);
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea,
+.comment-input {
     width: 100%;
+    max-width: 100%;
     padding: 12px;
     border: 1px solid var(--color-border);
     border-radius: 8px;
     font-size: 1rem;
+    font-family: Arial, sans-serif;
 }
 
-.form-group input:focus {
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.comment-input:focus {
     outline: none;
     border-color: var(--color-secondary);
     box-shadow: 0 0 0 3px rgba(47, 110, 165, 0.15);
-}
-
-.full-width-btn {
-    width: 100%;
-    cursor: pointer;
-    font-size: 1rem;
 }
 
 .form-footer {
@@ -210,39 +250,11 @@ a {
     font-weight: bold;
 }
 
-@media (min-width: 768px) {
-    .hero-section {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 40px;
-    }
-
-    .hero-text,
-    .hero-card {
-        width: 48%;
-    }
-
-    .logo-image {
-        width: 110px;
-    }
-}
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    resize: vertical;
-}
-
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 3px rgba(47, 110, 165, 0.15);
-}
-.feed-page {
+/* =========================
+   Feed / Profile Layout
+========================= */
+.feed-page,
+.profile-page {
     max-width: 900px;
     margin: 0 auto;
     padding: 24px 16px;
@@ -262,20 +274,28 @@ a {
 }
 
 .post-form-section,
-.posts-section {
+.posts-section,
+.users-section,
+.profile-card {
     background-color: var(--color-white);
     padding: 20px;
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin-bottom: 24px;
+    width: 100%;
 }
 
 .post-form-section h2,
-.posts-section h2 {
+.posts-section h2,
+.users-section h2,
+.profile-card h1 {
     margin-bottom: 16px;
-    color: var(--color-primary);
+    color: var(--color-primary-dark);
 }
 
+/* =========================
+   Posts
+========================= */
 .post-card {
     border: 1px solid var(--color-border);
     border-radius: 12px;
@@ -284,13 +304,31 @@ a {
     background-color: #f9fbfd;
 }
 
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.post-avatar {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background-color: var(--color-white);
+}
+
 .post-card h3 {
     color: var(--color-primary);
-    margin-bottom: 8px;
+    margin-bottom: 0;
 }
 
 .post-card p {
     margin-bottom: 10px;
+    word-break: break-word;
 }
 
 .post-time {
@@ -305,19 +343,9 @@ a {
     flex-wrap: wrap;
 }
 
-.post-btn {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    background-color: #dbe7f3;
-    color: var(--color-primary);
-}
-
-.post-btn:hover {
-    opacity: 0.9;
-}
+/* =========================
+   Comments
+========================= */
 .comments-section {
     margin-top: 16px;
     padding-top: 12px;
@@ -335,6 +363,7 @@ a {
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 8px;
+    word-break: break-word;
 }
 
 .no-comments {
@@ -349,58 +378,13 @@ a {
     flex-wrap: wrap;
 }
 
-.comment-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 10px;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
+.comment-form .post-btn {
+    min-width: 110px;
 }
 
-.comment-input:focus {
-    outline: none;
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 3px rgba(47, 110, 165, 0.15);
-}
-.profile-page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 24px 16px;
-}
-
-.profile-card {
-    background-color: var(--color-white);
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 24px;
-}
-
-.profile-card h1 {
-    color: var(--color-primary-dark);
-    margin-bottom: 16px;
-}
-
-.profile-info p {
-    margin-bottom: 10px;
-}
-
-.bio-form {
-    margin-top: 20px;
-}
-.users-section {
-    background-color: var(--color-white);
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 24px;
-}
-
-.users-section h2 {
-    margin-bottom: 16px;
-    color: var(--color-primary);
-}
-
+/* =========================
+   Users Section
+========================= */
 .user-card {
     display: flex;
     justify-content: space-between;
@@ -411,15 +395,187 @@ a {
     border-radius: 10px;
     margin-bottom: 12px;
     background-color: #f9fbfd;
+    flex-wrap: wrap;
 }
 
 .user-card p {
     margin: 0;
+    word-break: break-word;
 }
 
-@media (max-width: 600px) {
+/* =========================
+   Profile
+========================= */
+.profile-image-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.profile-image {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--color-secondary);
+    background-color: var(--color-white);
+}
+
+.profile-info {
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.bio-form {
+    margin-top: 20px;
+}
+
+/* =========================
+   Avatars
+========================= */
+.avatar-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 14px;
+}
+
+.avatar-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.avatar-choice input {
+    margin-bottom: 8px;
+}
+
+.avatar-option-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    padding: 3px;
+    background-color: var(--color-white);
+}
+
+/* =========================
+   Tablet
+========================= */
+@media (min-width: 768px) {
+    .hero-section {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 40px 24px;
+    }
+
+    .hero-text,
+    .hero-card {
+        width: 48%;
+    }
+
+    .logo-image {
+        width: 110px;
+    }
+}
+
+/* =========================
+   Mobile
+========================= */
+@media (max-width: 767px) {
+    .main-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-btn,
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-section,
+    .feed-page,
+    .profile-page {
+        padding: 16px;
+    }
+
+    .post-form-section,
+    .posts-section,
+    .users-section,
+    .profile-card,
+    .form-container,
+    .hero-card {
+        padding: 16px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.7rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .avatar-options {
+        justify-content: center;
+    }
+
+    .avatar-option-image {
+        width: 56px;
+        height: 56px;
+    }
+
+    .profile-image {
+        width: 95px;
+        height: 95px;
+    }
+
     .user-card {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .comment-form {
+        flex-direction: column;
+    }
+
+    .comment-form .post-btn {
+        width: 100%;
+    }
+
+    .post-actions {
+        flex-direction: column;
+    }
+
+    .post-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* =========================
+   Large Screens
+========================= */
+@media (min-width: 1024px) {
+    .feed-page,
+    .profile-page {
+        max-width: 1000px;
     }
 }

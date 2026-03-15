@@ -75,5 +75,4 @@ if (postLogoutBtn) {
         window.location.href = "login.html";
     });
 }
-
 renderPostDetails();

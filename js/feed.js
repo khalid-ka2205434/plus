@@ -29,8 +29,7 @@ function savePosts(posts) {
 }
 
 function formatDate() {
-    const now = new Date();
-    return now.toLocaleString();
+    return new Date().toLocaleString();
 }
 
 function renderUsers() {
@@ -61,7 +60,9 @@ function renderUsers() {
         const followButton = document.createElement("button");
         followButton.classList.add("post-btn");
 
-        const isFollowing = currentUser.following.includes(user.id);
+        const followingList = currentUser.following ? currentUser.following : [];
+        const isFollowing = followingList.includes(user.id);
+
         followButton.textContent = isFollowing ? "Unfollow" : "Follow";
 
         followButton.addEventListener("click", function () {
@@ -111,11 +112,14 @@ function toggleFollow(userId) {
 function renderPosts() {
     const currentUser = getCurrentUser();
     const posts = getPosts();
+    const users = getUsers();
 
     postsContainer.innerHTML = "";
 
+    const followingList = currentUser.following ? currentUser.following : [];
+
     const allowedPosts = posts.filter(function (post) {
-        return post.userId === currentUser.id || currentUser.following.includes(post.userId);
+        return post.userId === currentUser.id || followingList.includes(post.userId);
     });
 
     if (allowedPosts.length === 0) {
@@ -129,8 +133,25 @@ function renderPosts() {
         const postCard = document.createElement("div");
         postCard.classList.add("post-card");
 
+        const postHeader = document.createElement("div");
+        postHeader.classList.add("post-header");
+
+        const postAvatar = document.createElement("img");
+        postAvatar.classList.add("post-avatar");
+
+        const postUser = users.find(function (user) {
+            return user.id === post.userId;
+        });
+
+        postAvatar.src = postUser && postUser.profilePicture
+            ? postUser.profilePicture
+            : "assets/images/default-avatar.png";
+
         const username = document.createElement("h3");
         username.textContent = post.username;
+
+        postHeader.appendChild(postAvatar);
+        postHeader.appendChild(username);
 
         const content = document.createElement("p");
         content.textContent = post.content;
@@ -142,25 +163,33 @@ function renderPosts() {
         const actions = document.createElement("div");
         actions.classList.add("post-actions");
 
+        if (!post.likedBy) {
+            post.likedBy = [];
+        }
+
+        const alreadyLiked = post.likedBy.includes(currentUser.id);
+
         const likeButton = document.createElement("button");
         likeButton.classList.add("post-btn");
         likeButton.textContent = "Like (" + post.likes + ")";
+
         likeButton.addEventListener("click", function () {
-            likePost(post.id);
+            toggleLike(post.id);
         });
 
         actions.appendChild(likeButton);
+
         const detailsButton = document.createElement("button");
-            detailsButton.classList.add("post-btn");
-            detailsButton.textContent = "View Details";
-            detailsButton.addEventListener("click", function () {
-                localStorage.setItem("selectedPostId", post.id);
-                window.location.href = "post.html";
-            });
+        detailsButton.classList.add("post-btn");
+        detailsButton.textContent = "View Details";
+        detailsButton.addEventListener("click", function () {
+            localStorage.setItem("selectedPostId", post.id);
+            window.location.href = "post.html";
+        });
 
-actions.appendChild(detailsButton);
+        actions.appendChild(detailsButton);
 
-        if (currentUser && currentUser.id === post.userId) {
+        if (currentUser.id === post.userId) {
             const deleteButton = document.createElement("button");
             deleteButton.classList.add("post-btn");
             deleteButton.textContent = "Delete";
@@ -214,7 +243,7 @@ actions.appendChild(detailsButton);
             addComment(post.id, commentInput.value.trim());
         });
 
-        postCard.appendChild(username);
+        postCard.appendChild(postHeader);
         postCard.appendChild(content);
         postCard.appendChild(time);
         postCard.appendChild(actions);
@@ -225,13 +254,29 @@ actions.appendChild(detailsButton);
     });
 }
 
-function likePost(postId) {
+function toggleLike(postId) {
+    const currentUser = getCurrentUser();
     const posts = getPosts();
 
     const updatedPosts = posts.map(function (post) {
         if (post.id === postId) {
-            post.likes += 1;
+            if (!post.likedBy) {
+                post.likedBy = [];
+            }
+
+            const alreadyLiked = post.likedBy.includes(currentUser.id);
+
+            if (alreadyLiked) {
+                post.likedBy = post.likedBy.filter(function (id) {
+                    return id !== currentUser.id;
+                });
+                post.likes = Math.max(0, post.likes - 1);
+            } else {
+                post.likedBy.push(currentUser.id);
+                post.likes += 1;
+            }
         }
+
         return post;
     });
 
@@ -299,6 +344,7 @@ if (postForm) {
             content: postContent.value.trim(),
             timestamp: formatDate(),
             likes: 0,
+            likedBy: [],
             comments: []
         };
 
