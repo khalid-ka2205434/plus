@@ -11,9 +11,8 @@
         <a href="feed.html" class="logo-link">
             <img src="assets/images/logo.png" alt="Plus Logo" class="logo-image">
         </a>
-
         <nav class="nav-links">
-            <a href="feed.html" class="nav-btn">Feed</a>
+            <a href="feed.html"   class="nav-btn">Feed</a>
             <a href="profile.html" class="nav-btn">Profile</a>
             <button id="profileLogoutBtn" class="nav-btn signup-btn">Logout</button>
         </nav>
@@ -23,49 +22,50 @@
         <section class="profile-card">
             <h1>My Profile</h1>
 
+            <!-- Avatar -->
             <div class="profile-image-box">
                 <img id="profileImage" src="" alt="Profile Picture" class="profile-image">
             </div>
 
-            <div class="form-group">
-                <label>Change Profile Picture</label>
+            <!-- Following / Followers stats -->
+            <div id="profileStats" class="profile-stats"></div>
 
+            <!-- Change picture -->
+            <div class="form-group" style="margin-top:16px;">
+                <label>Change Profile Picture</label>
                 <div class="avatar-options">
                     <label class="avatar-choice">
                         <input type="radio" name="editProfilePicture" value="assets/images/avatar1.png">
                         <img src="assets/images/avatar1.png" alt="Avatar 1" class="avatar-option-image">
                     </label>
-
                     <label class="avatar-choice">
                         <input type="radio" name="editProfilePicture" value="assets/images/avatar2.png">
                         <img src="assets/images/avatar2.png" alt="Avatar 2" class="avatar-option-image">
                     </label>
-
                     <label class="avatar-choice">
                         <input type="radio" name="editProfilePicture" value="assets/images/avatar3.png">
                         <img src="assets/images/avatar3.png" alt="Avatar 3" class="avatar-option-image">
                     </label>
-
                     <label class="avatar-choice">
                         <input type="radio" name="editProfilePicture" value="assets/images/avatar4.png">
                         <img src="assets/images/avatar4.png" alt="Avatar 4" class="avatar-option-image">
                     </label>
-
                     <label class="avatar-choice">
                         <input type="radio" name="editProfilePicture" value="assets/images/avatar5.png">
                         <img src="assets/images/avatar5.png" alt="Avatar 5" class="avatar-option-image">
                     </label>
                 </div>
-
                 <button type="button" id="savePictureBtn" class="primary-btn">Save Picture</button>
             </div>
 
+            <!-- Info -->
             <div class="profile-info">
                 <p><strong>Username:</strong> <span id="profileUsername"></span></p>
-                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-                <p><strong>Bio:</strong> <span id="profileBio"></span></p>
+                <p><strong>Email:</strong>    <span id="profileEmail"></span></p>
+                <p><strong>Bio:</strong>      <span id="profileBio"></span></p>
             </div>
 
+            <!-- Edit bio -->
             <form id="bioForm" class="bio-form">
                 <div class="form-group">
                     <label for="bioInput">Edit Bio</label>

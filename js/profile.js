@@ -2,6 +2,7 @@ const profileUsername = document.getElementById("profileUsername");
 const profileEmail = document.getElementById("profileEmail");
 const profileBio = document.getElementById("profileBio");
 const profileImage = document.getElementById("profileImage");
+const profileStats = document.getElementById("profileStats");
 const bioForm = document.getElementById("bioForm");
 const bioInput = document.getElementById("bioInput");
 const myPostsContainer = document.getElementById("myPostsContainer");
@@ -35,6 +36,8 @@ function renderProfile() {
         return;
     }
 
+    const allUsers = getUsers();
+
     profileUsername.textContent = currentUser.username;
     profileEmail.textContent = currentUser.email;
     profileBio.textContent = currentUser.bio ? currentUser.bio : "No bio yet.";
@@ -42,6 +45,52 @@ function renderProfile() {
     profileImage.src = currentUser.profilePicture
         ? currentUser.profilePicture
         : "assets/images/default-avatar.png";
+
+    if (profileStats) {
+        const followingCount = (currentUser.following || []).length;
+        const followersCount = allUsers.filter(function (user) {
+            return user.id !== currentUser.id &&
+                   user.following &&
+                   user.following.includes(currentUser.id);
+        }).length;
+
+        profileStats.innerHTML = `
+            <span class="stat-item" id="followingToggle" style="cursor:pointer;">
+                <strong>${followingCount}</strong> Following
+            </span>
+            <span class="stat-divider">·</span>
+            <span class="stat-item">
+                <strong>${followersCount}</strong> Followers
+            </span>
+        `;
+
+        const followingToggle = document.getElementById("followingToggle");
+
+        if (followingToggle) {
+            followingToggle.addEventListener("click", function () {
+                showFollowingList(currentUser, allUsers);
+            });
+        }
+    }
+}
+
+function showFollowingList(currentUser, allUsers) {
+    const followingIds = currentUser.following || [];
+
+    if (followingIds.length === 0) {
+        alert("You are not following anyone yet.");
+        return;
+    }
+
+    const followingNames = followingIds.map(function (id) {
+        const user = allUsers.find(function (u) {
+            return u.id === id;
+        });
+
+        return user ? user.username : "Unknown";
+    });
+
+    alert("You are following:\n" + followingNames.join(", "));
 }
 
 function renderMyPosts() {
@@ -70,12 +119,23 @@ function renderMyPosts() {
         time.classList.add("post-time");
         time.textContent = post.timestamp;
 
-        const likes = document.createElement("p");
-        likes.textContent = "Likes: " + post.likes;
+        const meta = document.createElement("p");
+        meta.textContent = "Likes: " + post.likes + " | Comments: " + (post.comments ? post.comments.length : 0);
+
+        const detailsBtn = document.createElement("button");
+        detailsBtn.classList.add("post-btn");
+        detailsBtn.textContent = "View Details";
+        detailsBtn.style.marginTop = "10px";
+
+        detailsBtn.addEventListener("click", function () {
+            localStorage.setItem("selectedPostId", post.id);
+            window.location.href = "post.html";
+        });
 
         postCard.appendChild(content);
         postCard.appendChild(time);
-        postCard.appendChild(likes);
+        postCard.appendChild(meta);
+        postCard.appendChild(detailsBtn);
 
         myPostsContainer.appendChild(postCard);
     });

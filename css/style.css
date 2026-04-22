@@ -24,6 +24,7 @@ body {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 img {
@@ -31,9 +32,7 @@ img {
     display: block;
 }
 
-/* =========================
-   Header
-========================= */
+/* Header */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -61,9 +60,7 @@ img {
     align-items: center;
 }
 
-/* =========================
-   Buttons
-========================= */
+/* Buttons */
 .nav-btn,
 .primary-btn,
 .secondary-btn,
@@ -75,6 +72,7 @@ img {
     font-weight: bold;
     cursor: pointer;
     border: none;
+    text-align: center;
 }
 
 .nav-btn {
@@ -95,9 +93,9 @@ img {
 }
 
 .post-btn {
-    padding: 8px 14px;
     background-color: #dbe7f3;
     color: var(--color-primary);
+    padding: 8px 14px;
 }
 
 .nav-btn:hover,
@@ -112,9 +110,7 @@ img {
     font-size: 1rem;
 }
 
-/* =========================
-   Home / Hero
-========================= */
+/* Home Page */
 .hero-section {
     display: flex;
     flex-direction: column;
@@ -162,9 +158,7 @@ img {
     margin-bottom: 8px;
 }
 
-/* =========================
-   Forms
-========================= */
+/* Forms */
 .form-page {
     min-height: 100vh;
     display: flex;
@@ -218,7 +212,8 @@ img {
 
 .form-group input,
 .form-group textarea,
-.comment-input {
+.comment-input,
+.user-search-input {
     width: 100%;
     max-width: 100%;
     padding: 12px;
@@ -234,7 +229,8 @@ img {
 
 .form-group input:focus,
 .form-group textarea:focus,
-.comment-input:focus {
+.comment-input:focus,
+.user-search-input:focus {
     outline: none;
     border-color: var(--color-secondary);
     box-shadow: 0 0 0 3px rgba(47, 110, 165, 0.15);
@@ -250,12 +246,28 @@ img {
     font-weight: bold;
 }
 
-/* =========================
-   Feed / Profile Layout
-========================= */
+/* Password strength */
+.password-strength {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+}
+
+.password-hints {
+    margin-top: 10px;
+    padding-left: 18px;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.password-hints li {
+    margin-bottom: 4px;
+}
+
+/* Feed and Profile shared layout */
 .feed-page,
 .profile-page {
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     padding: 24px 16px;
 }
@@ -277,12 +289,12 @@ img {
 .posts-section,
 .users-section,
 .profile-card {
+    width: 100%;
     background-color: var(--color-white);
     padding: 20px;
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin-bottom: 24px;
-    width: 100%;
 }
 
 .post-form-section h2,
@@ -293,9 +305,7 @@ img {
     color: var(--color-primary-dark);
 }
 
-/* =========================
-   Posts
-========================= */
+/* Post cards */
 .post-card {
     border: 1px solid var(--color-border);
     border-radius: 12px;
@@ -343,9 +353,7 @@ img {
     flex-wrap: wrap;
 }
 
-/* =========================
-   Comments
-========================= */
+/* Comments */
 .comments-section {
     margin-top: 16px;
     padding-top: 12px;
@@ -358,12 +366,24 @@ img {
 }
 
 .comment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
     background-color: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 8px;
     word-break: break-word;
+}
+
+.comment-delete-btn {
+    border: none;
+    background-color: transparent;
+    color: var(--color-primary);
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .no-comments {
@@ -382,9 +402,11 @@ img {
     min-width: 110px;
 }
 
-/* =========================
-   Users Section
-========================= */
+/* Users section */
+.user-search-wrapper {
+    margin-bottom: 16px;
+}
+
 .user-card {
     display: flex;
     justify-content: space-between;
@@ -398,14 +420,32 @@ img {
     flex-wrap: wrap;
 }
 
-.user-card p {
-    margin: 0;
+.user-card-info {
+    flex: 1;
+    min-width: 180px;
+}
+
+.user-card-info p {
+    margin-bottom: 4px;
     word-break: break-word;
 }
 
-/* =========================
-   Profile
-========================= */
+.user-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.user-bio-preview {
+    color: #6b7280;
+}
+
+.user-stats-small {
+    font-size: 0.9rem;
+    color: var(--color-primary);
+}
+
+/* Profile */
 .profile-image-box {
     display: flex;
     justify-content: center;
@@ -419,6 +459,28 @@ img {
     border-radius: 50%;
     border: 3px solid var(--color-secondary);
     background-color: var(--color-white);
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    color: var(--color-primary);
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    font-size: 1rem;
+}
+
+.stat-divider {
+    color: #6b7280;
+}
+
+.profile-picture-group {
+    margin-top: 16px;
 }
 
 .profile-info {
@@ -435,9 +497,7 @@ img {
     margin-top: 20px;
 }
 
-/* =========================
-   Avatars
-========================= */
+/* Avatar choices */
 .avatar-options {
     display: flex;
     gap: 12px;
@@ -467,9 +527,17 @@ img {
     background-color: var(--color-white);
 }
 
-/* =========================
-   Tablet
-========================= */
+/* Username links */
+.username-link {
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+.username-link:hover {
+    text-decoration: underline;
+}
+
+/* Tablet */
 @media (min-width: 768px) {
     .hero-section {
         flex-direction: row;
@@ -488,9 +556,7 @@ img {
     }
 }
 
-/* =========================
-   Mobile
-========================= */
+/* Mobile */
 @media (max-width: 767px) {
     .main-header {
         flex-direction: column;
@@ -507,7 +573,6 @@ img {
     .primary-btn,
     .secondary-btn {
         width: 100%;
-        text-align: center;
     }
 
     .hero-section,
@@ -552,11 +617,17 @@ img {
         align-items: flex-start;
     }
 
+    .user-card-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
     .comment-form {
         flex-direction: column;
     }
 
-    .comment-form .post-btn {
+    .comment-form .post-btn,
+    .post-btn {
         width: 100%;
     }
 
@@ -564,15 +635,13 @@ img {
         flex-direction: column;
     }
 
-    .post-btn {
-        width: 100%;
-        text-align: center;
+    .comment-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
-/* =========================
-   Large Screens
-========================= */
+/* Large screens */
 @media (min-width: 1024px) {
     .feed-page,
     .profile-page {
